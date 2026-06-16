@@ -1,0 +1,1298 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFBF0;
+  --dark:#0D0D1A;
+  --blue:#1A3AFF;
+  --orange:#FF6B1A;
+  --yellow:#FFD600;
+  --muted:#777;
+  --border:#1a1a2e;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--dark);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* TICKER */
+.ticker{background:var(--blue);padding:9px 0;overflow:hidden;white-space:nowrap}
+.t-inner{display:inline-flex;animation:tick 32s linear infinite}
+.t-inner span{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--yellow);padding:0 28px}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:rgba(255,251,240,.96);backdrop-filter:blur(14px);border-bottom:2px solid var(--dark)}
+.nav-logo{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.04em;color:var(--dark);text-decoration:none}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-links a{color:var(--dark);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;border-radius:6px;transition:background .18s,color .18s}
+.nav-links a:hover{background:var(--yellow);color:var(--dark)}
+.nav-prize{background:var(--yellow);color:var(--dark)!important;border:2px solid var(--dark);font-weight:800!important;letter-spacing:.08em!important}
+.nav-prize:hover{background:var(--dark)!important;color:var(--yellow)!important}
+.nav-cta{background:var(--dark)!important;color:var(--yellow)!important;padding:9px 20px;border-radius:6px;font-weight:700!important}
+.nav-cta:hover{background:var(--blue)!important;color:#fff!important}
+@keyframes spinpop{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.35) rotate(18deg)}}
+.nav-toggle{display:none;position:relative;z-index:260;width:44px;height:44px;border:2px solid var(--dark);border-radius:8px;background:var(--yellow);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;transition:transform .18s,background .18s}
+.nav-toggle:hover{background:#ffe833;transform:translateY(-1px)}
+.nav-toggle span{display:block;width:20px;height:2px;background:var(--dark);border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.nav-backdrop{display:none}
+body.menu-open{overflow:hidden}
+body.menu-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.menu-open .nav-toggle span:nth-child(2){opacity:0}
+body.menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* HERO */
+.hero{min-height:88vh;background:var(--dark);display:flex;align-items:flex-end;padding:82px 40px 66px;position:relative;overflow:hidden;border-bottom:3px solid var(--yellow);isolation:isolate}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 78% 22%,rgba(26,58,255,.28) 0 17%,transparent 34%),radial-gradient(circle at 86% 78%,rgba(255,107,26,.16) 0 13%,transparent 30%);z-index:-3}
+.hero::after{content:'';position:absolute;left:40px;right:40px;bottom:34px;height:2px;background:linear-gradient(90deg,var(--yellow),rgba(255,214,0,0));opacity:.85;z-index:-1}
+.blob{position:absolute;border-radius:50%;pointer-events:none}
+.b1{width:520px;height:520px;background:var(--blue);opacity:.13;top:-140px;right:-150px;animation:fl 10s ease-in-out infinite;z-index:-2}
+.b2{width:300px;height:300px;background:var(--orange);opacity:.12;bottom:80px;right:130px;animation:fl 8s ease-in-out infinite reverse;z-index:-2}
+.b3{display:none}
+@keyframes fl{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.03)}}
+.hero-main{position:relative;z-index:2;max-width:1040px;width:100%}
+.hero-live{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--dark);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:22px;width:fit-content}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.55);opacity:.55}}
+.hero-hed{font-family:'Anton',sans-serif;font-size:clamp(58px,11.4vw,146px);line-height:.86;letter-spacing:-.015em;color:#fff;margin-bottom:24px;text-transform:uppercase;max-width:980px}
+.hero-hed .bl{color:#7B9FFF}
+.hero-hed .yl{color:var(--yellow)}
+.hero-hed .rotating-word{display:inline-block;min-width:3.25em;color:transparent;-webkit-text-stroke:2px #fff;transition:opacity .28s ease,transform .28s ease;will-change:opacity,transform}
+.hero-hed .rotating-word.swap{opacity:0;transform:translateY(10px)}
+.hero-sub{font-size:clamp(16px,1.5vw,20px);color:rgba(255,255,255,.72);max-width:620px;line-height:1.55;margin-bottom:28px;font-weight:500}
+.hero-details{display:flex;flex-wrap:wrap;gap:0;margin-bottom:30px;border-top:2px solid rgba(255,255,255,.12);border-bottom:2px solid rgba(255,255,255,.12);width:fit-content;max-width:100%}
+.hero-pill{display:inline-flex;align-items:center;color:#fff;padding:12px 18px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-right:2px solid rgba(255,255,255,.12)}
+.hero-pill:last-child{border-right:none}
+.hero-pill strong{color:var(--yellow);font-weight:800}
+.hero-btns{display:flex;gap:12px;align-items:center;position:relative;z-index:2;flex-wrap:wrap}
+.btn-y{background:var(--yellow);color:var(--dark);font-weight:800;font-size:14px;padding:15px 30px;border-radius:8px;border:2px solid var(--yellow);cursor:pointer;letter-spacing:.03em;transition:transform .15s,background .15s;text-decoration:none;display:inline-block;box-shadow:5px 5px 0 rgba(0,0,0,.38)}
+.btn-y:hover{background:#ffe833;transform:translateY(-2px)}
+.btn-w{color:#fff;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:9px;text-decoration:none;border:2px solid rgba(255,255,255,.24);padding:13px 22px;border-radius:8px;transition:border-color .2s,background .2s,transform .15s;background:rgba(255,255,255,.04)}
+.btn-w:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.hero-card,.hero-strip{display:none}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--dark)}
+.stat{padding:32px 28px;border-right:2px solid var(--dark)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Anton',sans-serif;font-size:50px;line-height:1;letter-spacing:-.02em;color:var(--dark)}
+.stat-n .accent{color:var(--blue)}
+.stat-l{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.07em;text-transform:uppercase;font-weight:600}
+
+/* GIVEAWAY BANNER */
+.gw-banner{position:relative;background:var(--orange);border-top:2px solid var(--dark);border-bottom:2px solid var(--dark);padding:30px 40px;display:flex;align-items:center;justify-content:space-between;gap:28px;min-height:118px;overflow:hidden}
+.gw-banner::after{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--yellow);border-right:2px solid var(--dark)}
+.gw-left{display:flex;align-items:center;gap:20px;position:relative;z-index:2}
+.gw-text{max-width:660px}
+.gw-kicker{display:inline-flex;align-items:center;background:var(--dark);color:var(--yellow);font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:6px 12px;border-radius:6px;margin-bottom:10px}
+.gw-text strong{font-family:'Anton',sans-serif;font-size:clamp(30px,4vw,48px);letter-spacing:.01em;color:var(--dark);display:block;line-height:.92}
+.gw-text span{display:block;font-size:14px;color:rgba(0,0,0,.62);font-weight:600;margin-top:8px;line-height:1.45}
+.gw-form{display:flex;gap:8px;align-items:center;position:relative;z-index:2;background:rgba(255,251,240,.38);border:2px solid rgba(13,13,26,.24);border-radius:10px;padding:9px;min-width:min(100%,380px)}
+.gw-input{background:rgba(255,255,255,.72);border:2px solid rgba(13,13,26,.2);border-radius:7px;padding:12px 16px;font-size:14px;font-family:'Inter',sans-serif;color:var(--dark);outline:none;transition:border-color .2s,background .2s;width:210px;font-weight:600}
+.gw-input::placeholder{color:rgba(0,0,0,.4)}
+.gw-input:focus{border-color:rgba(13,13,26,.55);background:#fff}
+.gw-btn{background:var(--dark);color:var(--yellow);border:none;border-radius:7px;padding:12px 20px;font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.08em;cursor:pointer;transition:transform .15s,background .15s;white-space:nowrap}
+.gw-btn:hover{background:var(--blue);color:#fff;transform:translateY(-1px)}
+.gw-burst,.gw-emoji,.gw-prize-row{display:none}
+
+/* SECTIONS */
+.sec{padding:80px 40px}
+.sec.alt{background:#f7f3e8}
+.sec.dark{background:var(--dark)}
+.eye{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.eye.lt{color:var(--yellow)}
+.hed{font-family:'Anton',sans-serif;font-size:clamp(36px,5.5vw,64px);line-height:.93;letter-spacing:-.01em;color:var(--dark)}
+.hed.lt{color:#fff}
+.sec-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;gap:16px}
+.link-all{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--blue);padding-bottom:1px;white-space:nowrap;transition:color .18s,border-color .18s;margin-bottom:4px}
+.link-all:hover{color:var(--orange);border-color:var(--orange)}
+
+/* COUNTDOWN */
+.cd{display:flex;align-items:center;gap:0;margin-bottom:40px}
+.cd-u{text-align:center;min-width:76px}
+.cd-n{font-family:'Anton',sans-serif;font-size:54px;line-height:1;color:var(--blue);letter-spacing:-.02em}
+.cd-l{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-top:3px}
+.cd-sep{font-family:'Anton',sans-serif;font-size:40px;color:#ccc;margin:0 2px;padding-bottom:14px}
+
+/* EVENT CARDS */
+.egrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ecard{background:#fff;border:2px solid var(--dark);border-radius:12px;overflow:hidden;transition:transform .22s,box-shadow .22s;cursor:pointer}
+.ecard:hover{transform:translateY(-4px);box-shadow:5px 5px 0 var(--dark)}
+.ecard-img{height:210px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ecard-img.bblue{background:var(--blue)}
+.ecard-img.byellow{background:var(--yellow)}
+.eg{font-family:'Anton',sans-serif;font-size:68px;letter-spacing:-.02em;user-select:none}
+.eg.w{color:rgba(255,255,255,.1)}
+.eg.d{color:rgba(13,13,26,.08)}
+.ebadge{position:absolute;top:13px;right:13px;font-family:'Anton',sans-serif;font-size:12px;letter-spacing:.07em;padding:5px 13px;border-radius:6px}
+.ebadge.yl{background:var(--yellow);color:var(--dark)}
+.ebadge.dim{background:rgba(13,13,26,.12);color:rgba(13,13,26,.4)}
+.ebody{padding:22px}
+.vtag{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.ename{font-family:'Anton',sans-serif;font-size:26px;line-height:1;margin-bottom:7px;color:var(--dark)}
+.emeta{font-size:13px;color:var(--muted);display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.ecta{display:flex;justify-content:space-between;align-items:center}
+.epill{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:6px;background:var(--yellow);border:2px solid var(--dark);color:var(--dark)}
+.epill.free{background:#d4f5e2;border-color:#2ecc71;color:#1a6b3a}
+.earrow{width:36px;height:36px;border:2px solid var(--dark);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--dark);transition:all .18s}
+.ecard:hover .earrow{background:var(--dark);color:var(--yellow)}
+
+
+/* EVENT MODAL */
+.event-modal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(13,13,26,.68);backdrop-filter:blur(8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .34s ease,visibility .34s ease}
+.event-modal.open{opacity:1;visibility:visible;pointer-events:auto}
+.event-dialog{width:min(920px,100%);max-height:90vh;overflow:auto;background:var(--bg);border:2px solid var(--dark);border-radius:16px;box-shadow:10px 10px 0 rgba(0,0,0,.35);position:relative;transform:translateY(34px) scale(.96);opacity:0;transition:transform .46s cubic-bezier(.22,1,.36,1),opacity .34s ease}
+.event-modal.open .event-dialog{transform:translateY(0) scale(1);opacity:1}
+.event-dialog::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--yellow);z-index:3}
+.event-close{position:absolute;top:18px;right:18px;width:40px;height:40px;border:2px solid var(--dark);border-radius:8px;background:#fff;color:var(--dark);font-size:24px;line-height:1;cursor:pointer;z-index:2;transition:background .18s,transform .15s}
+.event-close:hover{background:var(--yellow);transform:scale(1.04)}
+.event-modal-head{background:var(--blue);padding:34px 34px 30px;border-bottom:2px solid var(--dark);position:relative;overflow:hidden}
+.event-modal-head::after{content:'WINTER';position:absolute;right:20px;bottom:-22px;font-family:'Anton',sans-serif;font-size:108px;color:rgba(255,255,255,.08);letter-spacing:-.03em;pointer-events:none}
+.event-kicker{display:inline-flex;background:var(--yellow);color:var(--dark);border-radius:6px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.event-title{font-family:'Anton',sans-serif;font-size:clamp(42px,7vw,78px);line-height:.9;color:#fff;letter-spacing:-.02em;position:relative;z-index:1}
+.event-subtitle{color:rgba(255,255,255,.72);font-size:15px;line-height:1.6;max-width:560px;margin-top:12px;position:relative;z-index:1}
+.event-modal-body{padding:30px 34px 34px}
+.event-details-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:26px}
+.event-detail{background:#fff;border:2px solid var(--dark);border-radius:10px;padding:16px}
+.event-detail span{display:block;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.event-detail strong{display:block;font-size:14px;line-height:1.35;color:var(--dark)}
+.event-info{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
+.event-panel{background:#fff;border:2px solid var(--dark);border-radius:12px;padding:22px}
+.event-panel h3{font-family:'Anton',sans-serif;font-size:24px;line-height:1;margin-bottom:14px;color:var(--dark)}
+.event-panel p,.event-panel li{font-size:14px;color:var(--muted);line-height:1.65}
+.event-panel ul{padding-left:18px}
+.event-schedule{display:flex;flex-direction:column;gap:10px}
+.event-time{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid rgba(13,13,26,.12);padding-bottom:10px;font-size:14px}
+.event-time:last-child{border-bottom:none;padding-bottom:0}
+.event-time b{color:var(--dark)}
+.event-time span{color:var(--muted);text-align:right}
+.event-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.event-primary,.event-secondary{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:12px 18px;transition:transform .15s,background .18s}
+.event-primary{background:var(--dark);color:var(--yellow);border:2px solid var(--dark)}
+.event-primary:hover{background:var(--blue);color:#fff;transform:scale(1.03)}
+.event-secondary{background:var(--yellow);color:var(--dark);border:2px solid var(--dark)}
+.event-secondary:hover{background:#ffe833;transform:scale(1.03)}
+body.modal-lock{overflow:hidden}
+@media (max-width:800px){.event-details-grid{grid-template-columns:1fr 1fr}.event-info{grid-template-columns:1fr}.event-modal{padding:14px}.event-modal-head,.event-modal-body{padding-left:22px;padding-right:22px}.event-dialog{box-shadow:6px 6px 0 rgba(0,0,0,.35)}}
+@media (max-width:520px){.event-details-grid{grid-template-columns:1fr}.event-actions a{width:100%}.event-modal-head::after{font-size:74px}}
+
+
+
+
+
+/* NEXT EVENT ANNOUNCEMENT CARD */
+.announcement-card .ecard-img{background:var(--yellow);height:auto;min-height:210px;padding:24px;align-items:center;justify-content:center}
+.announcement-box{width:100%;display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;z-index:1}
+.announcement-label{width:fit-content;background:var(--dark);color:var(--yellow);border-radius:6px;padding:7px 12px;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.announcement-title{font-family:'Anton',sans-serif;font-size:clamp(36px,4.5vw,52px);line-height:.9;color:var(--dark);letter-spacing:-.01em}
+.announcement-date{font-size:13px;font-weight:800;color:rgba(13,13,26,.68);letter-spacing:.04em;text-transform:uppercase}
+.announce-count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:2px}
+.announce-unit{background:#fff;border:2px solid var(--dark);border-radius:8px;padding:10px 6px;text-align:center}
+.announce-num{font-family:'Anton',sans-serif;font-size:26px;line-height:1;color:var(--blue)}
+.announce-lab{font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:rgba(13,13,26,.55);margin-top:3px}
+.announcement-card .ebody{border-top:2px solid var(--dark)}
+.announcement-card .epill{background:var(--dark);color:var(--yellow);border-color:var(--dark)}
+.notify-modal .event-modal-head{background:var(--orange)}
+.notify-modal .event-modal-head::after{content:'';display:none}
+.notify-modal .event-title{color:var(--dark)}
+.notify-modal .event-subtitle{color:rgba(13,13,26,.68)}
+.notify-form{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid var(--dark);border-radius:12px;padding:12px;margin-top:6px}
+.notify-input{flex:1;min-width:0;border:none;outline:none;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);padding:10px;background:transparent}
+.notify-btn{border:2px solid var(--dark);background:var(--dark);color:var(--yellow);border-radius:8px;padding:12px 18px;font-family:'Anton',sans-serif;font-size:14px;letter-spacing:.07em;cursor:pointer;white-space:nowrap;transition:background .18s,transform .15s}
+.notify-btn:hover{background:var(--blue);color:#fff;transform:scale(1.03)}
+.notify-note{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5}
+@media (max-width:560px){.announcement-card .ecard-img{padding:18px;min-height:220px}.announce-count{grid-template-columns:repeat(2,1fr)}.notify-form{flex-direction:column;align-items:stretch}.notify-btn{width:100%}}
+
+/* VENDOR LINEUP MODAL */
+.vendor-modal .event-modal-head{background:var(--dark)}
+.vendor-modal .event-modal-head::after{content:'LINEUP';color:rgba(255,214,0,.08)}
+.vendor-modal .event-kicker{background:var(--orange);color:var(--dark)}
+.vendor-lineup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vendor-category{background:#fff;border:2px solid var(--dark);border-radius:12px;overflow:hidden}
+.vendor-category-head{padding:16px 18px;border-bottom:2px solid var(--dark);background:var(--yellow)}
+.vendor-category:nth-child(2) .vendor-category-head{background:#fff}
+.vendor-category:nth-child(3) .vendor-category-head{background:#e8f0ff}
+.vendor-category h3{font-family:'Anton',sans-serif;font-size:26px;letter-spacing:.02em;line-height:1;color:var(--dark)}
+.vendor-list{list-style:none;padding:10px 18px 16px}
+.vendor-list li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(13,13,26,.1);font-size:14px;font-weight:700;color:var(--dark)}
+.vendor-list li:last-child{border-bottom:none}
+.vendor-list li::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.vendor-note{margin-top:18px;background:#fff;border:2px solid var(--dark);border-radius:10px;padding:14px 16px;font-size:13px;font-weight:600;color:var(--muted);line-height:1.55}
+@media (max-width:880px){.vendor-lineup-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:580px){.vendor-lineup-grid{grid-template-columns:1fr}}
+
+/* VENDOR MARQUEE — fixed */
+.vmq{padding:60px 0;border-top:2px solid var(--dark);border-bottom:2px solid var(--dark);background:var(--bg);overflow:hidden}
+.vmq-head{padding:0 40px 34px;display:flex;justify-content:space-between;align-items:flex-end}
+.mq-row{overflow:hidden;padding:4px 0;display:flex}
+.mq-row+.mq-row{margin-top:10px}
+.mq-track{display:flex;gap:10px;animation:none;flex-shrink:0}
+.mq-row.ltr .mq-track{animation:mql 35s linear infinite}
+.mq-row.rtl .mq-track{animation:mqr 42s linear infinite}
+@keyframes mql{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+@keyframes mqr{0%{transform:translateX(-100%)}100%{transform:translateX(0)}}
+.vpill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--dark);border-radius:8px;padding:10px 18px;font-size:14px;font-weight:600;color:var(--dark);white-space:nowrap;cursor:pointer;transition:background .18s;flex-shrink:0}
+.vpill:hover{background:var(--yellow)}
+.vdot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+
+/* TIKTOK CAROUSEL */
+.tt-outer{position:relative;overflow:hidden}
+.tt-carousel{display:flex;gap:16px;transition:transform .42s cubic-bezier(.4,0,.2,1);will-change:transform;padding:4px 2px 8px}
+.tt-card{flex-shrink:0;width:220px;background:#111126;border-radius:12px;border:2px solid rgba(255,255,255,.08);overflow:hidden;transition:border-color .2s,transform .2s;aspect-ratio:9/16;position:relative}
+.tt-card:hover{border-color:#7B9FFF;transform:translateY(-4px)}
+.tt-card iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.tt-fallback{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:12px}
+.tt-logo-txt{font-family:'Anton',sans-serif;font-size:22px;color:#fff;letter-spacing:.04em}
+.tt-logo-txt span{color:#7B9FFF}
+.tt-play-btn{width:46px;height:46px;background:#7B9FFF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;transition:transform .18s}
+.tt-card:hover .tt-play-btn{transform:scale(1.12)}
+.tt-handle{font-size:12px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.06em}
+.tt-caption{font-size:11px;color:rgba(255,255,255,.34);line-height:1.5}
+.tt-note{font-size:11px;color:rgba(255,255,255,.32);text-align:center;margin-top:12px;line-height:1.5}
+.tt-nav{display:flex;gap:8px;justify-content:center;margin-top:24px}
+.tt-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.tt-dot.active{background:var(--yellow);transform:scale(1.3)}
+.tt-arrows{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.tt-arr{width:40px;height:40px;border:2px solid rgba(255,255,255,.18);border-radius:8px;background:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .18s,background .18s}
+.tt-arr:hover{border-color:var(--yellow);background:rgba(255,214,0,.1);color:var(--yellow)}
+.tt-cta{display:flex;justify-content:center;margin-top:28px}
+.tt-follow{display:inline-flex;align-items:center;gap:10px;background:var(--yellow);color:var(--dark);font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.08em;padding:14px 30px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:background .18s,transform .15s}
+.tt-follow:hover{background:#ffe833;transform:scale(1.04)}
+
+/* DIRECTIONS */
+#location{padding-left:40px;padding-right:40px}
+#location .sec-row{max-width:1180px;margin-left:auto;margin-right:auto;margin-bottom:30px;align-items:flex-end}
+.dir-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:start;max-width:1180px;margin:0 auto}
+.dir-map{width:100%;background:#e8f0ff;border:2px solid var(--dark);border-radius:12px;overflow:hidden}
+.dir-map-vis{height:380px;background:#dce8ff;position:relative}
+.dir-map-vis iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.dir-map-body{padding:20px 22px;border-top:2px solid var(--dark)}
+.dir-name{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.02em;color:var(--dark);margin-bottom:4px}
+.dir-addr{font-size:13px;color:var(--muted);margin-bottom:18px}
+.dir-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:13px;padding:11px 22px;border-radius:6px;text-decoration:none;border:2px solid var(--blue);transition:transform .15s,background .15s}
+.dir-btn:hover{background:var(--dark);border-color:var(--dark);transform:scale(1.03)}
+.transport{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+.t-item{display:flex;gap:14px;align-items:flex-start;min-height:142px;background:#fff;border:2px solid var(--dark);border-radius:12px;padding:18px;box-shadow:4px 4px 0 rgba(13,13,26,.12);transition:transform .18s,box-shadow .18s,background .18s}
+.t-item:hover{background:var(--yellow);transform:translateY(-3px);box-shadow:6px 6px 0 var(--dark)}
+.t-ico{width:44px;height:44px;background:var(--bg);border:2px solid var(--dark);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.t-title{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.03em;margin-bottom:5px;color:var(--dark)}
+.t-desc{font-size:13px;color:var(--muted);line-height:1.55}
+
+/* EXP GRID */
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--dark);border:2px solid var(--dark);border-radius:12px;overflow:hidden}
+.exp-cell{background:var(--bg);padding:30px 24px;transition:background .18s}
+.exp-cell:hover{background:var(--yellow)}
+.exp-cell.wide{grid-column:span 2;border-bottom:2px solid var(--orange)}
+.exp-ico{font-size:24px;margin-bottom:12px}
+.exp-t{font-family:'Anton',sans-serif;font-size:17px;letter-spacing:.02em;margin-bottom:7px;line-height:1.05;color:var(--dark)}
+.exp-d{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:3px solid var(--yellow);padding:52px 40px 34px}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:44px;gap:32px;flex-wrap:wrap}
+.ft-logo{font-family:'Anton',sans-serif;font-size:26px;letter-spacing:.04em;color:#fff;margin-bottom:10px}
+.ft-logo span{color:var(--yellow)}
+.ft-tag{font-size:13px;color:rgba(255,255,255,.38);max-width:210px;line-height:1.6}
+.ft-cols{display:flex;gap:44px;flex-wrap:wrap}
+.ft-col-t{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:13px;color:var(--yellow)}
+.ft-col a{display:block;font-size:13px;color:rgba(255,255,255,.42);text-decoration:none;margin-bottom:8px;transition:color .18s}
+.ft-col a:hover{color:#fff}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);font-size:12px;color:rgba(255,255,255,.28);flex-wrap:wrap;gap:10px}
+.socials{display:flex;gap:8px}
+.soc{width:34px;height:34px;border:2px solid rgba(255,255,255,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);text-decoration:none;font-size:11px;font-weight:700;transition:all .18s}
+.soc:hover{border-color:var(--yellow);color:var(--yellow)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE CLEANUP */
+@media (max-width: 980px){
+  nav,.hero,.sec,footer{padding-left:24px;padding-right:24px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(-n+2){border-bottom:2px solid var(--dark)}
+  .gw-banner{padding:34px 24px;align-items:flex-start;flex-direction:column}
+  .gw-banner::after{inset:10px}
+  .gw-form{width:100%;min-width:0}
+  .gw-input{width:100%;flex:1}
+  .egrid{grid-template-columns:1fr}
+  #location{padding-left:24px;padding-right:24px}
+  #location .sec-row{max-width:1180px}
+  .transport{grid-template-columns:1fr 1fr}
+  .exp-grid{grid-template-columns:1fr 1fr}
+  .exp-cell.wide{grid-column:span 2}
+  .vmq-head{padding-left:24px;padding-right:24px}
+}
+
+@media (max-width: 760px){
+  nav{padding:12px 18px}
+  .nav-toggle{display:flex}
+  .nav-backdrop{display:block;position:fixed;inset:0;z-index:220;background:rgba(13,13,26,.42);opacity:0;pointer-events:none;transition:opacity .28s ease}
+  .nav-links{position:fixed;z-index:240;top:0;right:0;bottom:0;width:min(84vw,360px);height:100vh;background:var(--bg);border-left:2px solid var(--dark);box-shadow:-10px 0 0 rgba(13,13,26,.12);display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px;padding:88px 22px 24px;transform:translateX(110%);transition:transform .32s cubic-bezier(.4,0,.2,1)}
+  .nav-links a{font-size:16px;padding:15px 16px;border:2px solid var(--dark);background:#fff}
+  .nav-prize{text-align:center}
+  .nav-cta{text-align:center;margin-top:6px}
+  body.menu-open .nav-backdrop{opacity:1;pointer-events:auto}
+  body.menu-open .nav-links{transform:translateX(0)}
+  .hero{min-height:78vh;padding-top:48px;padding-bottom:42px}
+  .hero-hed{font-size:clamp(52px,17vw,88px)}
+  .hero-sub{font-size:15px;max-width:34rem}
+  .hero-btns a,.btn-y,.btn-w{width:100%;justify-content:center;text-align:center}
+  .b1{width:340px;height:340px;right:-170px}
+  .b2{width:220px;height:220px;right:-80px;bottom:120px}
+  .b3{display:none}
+  .ticker .t-inner span{font-size:12px;padding:0 20px}
+  .sec{padding-top:56px;padding-bottom:56px}
+  .sec-row,.vmq-head{align-items:flex-start;flex-direction:column;margin-bottom:30px}
+  .link-all{margin-bottom:0}
+  .cd{display:grid;grid-template-columns:1fr auto 1fr;justify-content:start;max-width:340px;row-gap:10px}
+  .cd-u{min-width:0}
+  .cd-n{font-size:44px}
+  .cd-sep:nth-of-type(4){display:none}
+  .egrid{gap:18px}
+  .ecard-img{height:170px}
+  .eg{font-size:52px}
+  .gw-left{align-items:flex-start}
+  .gw-burst,.gw-emoji,.gw-prize-row{display:none}
+  .gw-form{flex-direction:column;align-items:stretch}
+  .gw-btn{width:100%;padding:15px 20px}
+  .tt-card{width:76vw;max-width:260px}
+  #location .sec-row{margin-bottom:24px}
+  .dir-map-vis{height:300px}
+  .ft-top,.ft-bot{flex-direction:column;align-items:flex-start}
+}
+
+@media (max-width: 560px){
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:2px solid var(--dark);padding:24px 20px}
+  .stat:last-child{border-bottom:none}
+  .stat-n{font-size:44px}
+  .exp-grid{grid-template-columns:1fr}
+  .exp-cell.wide{grid-column:span 1}
+  .exp-cell{padding:24px 20px}
+  .emeta{gap:6px}
+  .ecta{align-items:flex-start;gap:12px;flex-direction:column}
+  .earrow{align-self:flex-end}
+  .cd{grid-template-columns:repeat(2,1fr);gap:14px;max-width:none}
+  .cd-sep{display:none}
+  .cd-u{background:#fff;border:2px solid var(--dark);border-radius:10px;padding:14px 8px}
+  .transport{grid-template-columns:1fr}
+  .t-item{min-height:0}
+  .gw-banner{padding:30px 18px}
+  .gw-text strong{font-size:42px}
+  .gw-text span{font-size:14px}
+  .gw-form{padding:12px;box-shadow:5px 5px 0 var(--dark)}
+  .map-pin-label{font-size:11px}
+  .ft-cols{width:100%;gap:28px;display:grid;grid-template-columns:1fr 1fr}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+
+
+@media (max-width: 640px){
+  .hero{min-height:82vh;padding-top:70px;padding-bottom:52px}
+  .hero::after{left:20px;right:20px;bottom:24px}
+  .hero-details{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .hero-pill{border-right:none;border-bottom:2px solid rgba(255,255,255,.12);padding:11px 10px;font-size:10px}
+  .hero-pill:nth-child(odd){border-right:2px solid rgba(255,255,255,.12)}
+  .hero-pill:nth-last-child(-n+2){border-bottom:none}
+  .hero-hed .rotating-word{min-width:2.9em;-webkit-text-stroke:1.4px #fff}
+}
+
+</style>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-inner">
+    <span>WINTERFEST 2026</span><span>✦</span>
+    <span>MOUNTIES — 19–21 JUNE</span><span>✦</span>
+    <span>20+ VENDORS</span><span>✦</span>
+    <span>FREE ENTRY — NO TICKETS NEEDED</span><span>✦</span>
+    <span>WESTERN SYDNEY'S BIGGEST FOOD EVENT</span><span>✦</span>
+    <span>WINTERFEST 2026</span><span>✦</span>
+    <span>MOUNTIES — 19–21 JUNE</span><span>✦</span>
+    <span>20+ VENDORS</span><span>✦</span>
+    <span>FREE ENTRY — NO TICKETS NEEDED</span><span>✦</span>
+    <span>WESTERN SYDNEY'S BIGGEST FOOD EVENT</span><span>✦</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="#top" class="nav-logo" aria-label="Bossman home">BOSSMAN<span>.</span></a>
+  <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-backdrop" data-menu-close></div>
+  <div class="nav-links" id="nav-menu">
+    <a href="#events">Events</a>
+    <a href="#vendors">Vendors</a>
+    <a href="#tiktok">TikTok</a>
+    <a href="#location">Location</a>
+    <a href="#giveaway" class="nav-prize">Giveaway</a>
+    <a href="https://www.tiktok.com/@bossman_experiences" target="_blank" rel="noopener" class="nav-cta">Follow Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="hero-main">
+    <div class="hero-live"><span class="live-dot"></span>Mounties Winterfest · Free Entry</div>
+    <h1 class="hero-hed">WESTERN<br><span class="bl">SYDNEY</span><br><span class="yl">EATS</span> <span class="rotating-word" id="hero-word">BIG.</span></h1>
+    <p class="hero-sub">Three days of stacked street food, live energy and Bossman vendors taking over Mounties Carpark in Mt Pritchard.</p>
+    <div class="hero-details" aria-label="Event highlights">
+      <span class="hero-pill"><strong>19–21 June</strong></span>
+      <span class="hero-pill">Mounties Carpark</span>
+      <span class="hero-pill">20+ Vendors</span>
+      <span class="hero-pill">Free Entry</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#events" class="btn-y">Explore Winterfest</a>
+      <a href="#vendors" class="btn-w">↓ See the lineup</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats" id="stats">
+  <div class="stat"><div class="stat-n">20<span class="accent">+</span></div><div class="stat-l">Food Vendors</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">Days of Eating</div></div>
+  <div class="stat"><div class="stat-n">$<span class="accent">0</span></div><div class="stat-l">Free Entry</div></div>
+  <div class="stat"><div class="stat-n">1<span class="accent">K</span></div><div class="stat-l">Expected Guests</div></div>
+</div>
+
+<!-- GIVEAWAY BANNER -->
+<div class="gw-banner reveal" id="giveaway">
+  <div class="gw-left">
+    <div class="gw-emoji">🎟</div>
+    <div class="gw-text">
+      <div class="gw-kicker">Bossman giveaway</div>
+      <strong>WIN 5 FREE FOOD VOUCHERS</strong>
+      <span>Drop your number for a chance to score a free feed at Winterfest. No spam, winner gets texted.</span>
+      <div class="gw-prize-row">
+        <div class="gw-chip">5 vouchers</div>
+        <div class="gw-chip">Free entry event</div>
+        <div class="gw-chip">Winner texted</div>
+      </div>
+    </div>
+  </div>
+  <div class="gw-form">
+    <input type="tel" class="gw-input" placeholder="Your phone number" aria-label="Your phone number">
+    <button class="gw-btn">ENTER NOW</button>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<section class="sec" id="events">
+  <div class="sec-row reveal">
+    <div><div class="eye">Coming Up</div><div class="hed">NEXT EVENT</div></div>
+    <a href="#" class="link-all">All Events →</a>
+  </div>
+  <div class="cd reveal">
+    <div class="cd-u"><div class="cd-n" id="d">--</div><div class="cd-l">Days</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-u"><div class="cd-n" id="h">--</div><div class="cd-l">Hours</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-u"><div class="cd-n" id="m">--</div><div class="cd-l">Mins</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-u"><div class="cd-n" id="s">--</div><div class="cd-l">Secs</div></div>
+  </div>
+  <div class="egrid reveal">
+    <div class="ecard event-open" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="winterfest-modal">
+      <div class="ecard-img bblue"><div class="eg w">WINTER</div><div class="ebadge yl">19–21 JUNE</div></div>
+      <div class="ebody">
+        <div class="vtag">Mounties Carpark — Mt Pritchard</div>
+        <div class="ename">MOUNTIES WINTERFEST</div>
+        <div class="emeta"><span>19th – 21st June</span><span>·</span><span>254 Humphries Rd</span></div>
+        <div class="ecta"><span class="epill free">Free Entry — Just Show Up</span><div class="earrow">→</div></div>
+      </div>
+    </div>
+    <div class="ecard announcement-card notify-open" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="notify-modal">
+      <div class="ecard-img byellow">
+        <div class="announcement-box">
+          <div class="announcement-label">Next Event</div>
+          <div class="announcement-title">ANNOUNCED SOON</div>
+          <div class="announcement-date">Monday 22 June</div>
+          <div class="announce-count" aria-label="Countdown to next event announcement">
+            <div class="announce-unit"><div class="announce-num" id="nd">--</div><div class="announce-lab">Days</div></div>
+            <div class="announce-unit"><div class="announce-num" id="nh">--</div><div class="announce-lab">Hours</div></div>
+            <div class="announce-unit"><div class="announce-num" id="nm">--</div><div class="announce-lab">Mins</div></div>
+            <div class="announce-unit"><div class="announce-num" id="ns">--</div><div class="announce-lab">Secs</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ebody">
+        <div class="vtag">Announced after Winterfest</div>
+        <div class="ename">NEXT EVENT</div>
+        <div class="emeta"><span>Get notified when it drops.</span></div>
+        <div class="ecta"><span class="epill">Email Me First</span><div class="earrow">→</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT DETAILS MODAL -->
+<div class="event-modal" id="winterfest-modal" aria-hidden="true">
+  <div class="event-dialog" role="dialog" aria-modal="true" aria-labelledby="winterfest-title">
+    <button class="event-close" type="button" aria-label="Close event details">×</button>
+    <div class="event-modal-head">
+      <div class="event-kicker">Next Event</div>
+      <h2 class="event-title" id="winterfest-title">MOUNTIES WINTERFEST</h2>
+      <p class="event-subtitle">Three days of Western Sydney food, live energy and 20+ vendors at Mounties Winterfest in the Mounties carpark.</p>
+    </div>
+    <div class="event-modal-body">
+      <div class="event-details-grid">
+        <div class="event-detail"><span>Date</span><strong>19th June – 21st June 2026</strong></div>
+        <div class="event-detail"><span>Time</span><strong>Fri/Sat 5pm – 10pm, Sun 12pm – 8pm</strong></div>
+        <div class="event-detail"><span>Entry</span><strong>Free entry, no ticket needed</strong></div>
+        <div class="event-detail"><span>Venue</span><strong>Mounties Carpark</strong></div>
+      </div>
+
+      <div class="event-info">
+        <div class="event-panel">
+          <h3>Event details</h3>
+          <p>Bossman Experiences is taking over the Mounties carpark for Mounties Winterfest, bringing spuds, BBQ, burgers, dumplings, desserts, drinks and more to the heart of Western Sydney.</p>
+          <ul>
+            <li>20+ food and dessert vendors</li>
+            <li>Free on-site parking at Mounties</li>
+            <li>Family-friendly outdoor food event</li>
+            <li>Giveaway entry available on the day</li>
+          </ul>
+          <div class="event-actions">
+            <a class="event-primary" href="https://www.google.com/maps/dir/?api=1&destination=254+Humphries+Rd+Mount+Pritchard+NSW+2170" target="_blank">Get Directions</a>
+            <a class="event-secondary event-lineup-link" href="#vendors">See Vendor Lineup</a>
+          </div>
+        </div>
+
+        <div class="event-panel">
+          <h3>Timings</h3>
+          <div class="event-schedule">
+            <div class="event-time"><b>Friday 19 June</b><span>5pm – 10pm</span></div>
+            <div class="event-time"><b>Saturday 20 June</b><span>5pm – 10pm</span></div>
+            <div class="event-time"><b>Sunday 21 June</b><span>12pm – 8pm</span></div>
+          </div>
+          <div style="height:16px"></div>
+          <h3>Location</h3>
+          <p><strong style="color:var(--dark)">Mounties Winterfest</strong><br>Mounties Carpark<br>254 Humphries Rd, Mount Pritchard NSW 2170</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- NEXT EVENT NOTIFY MODAL -->
+<div class="event-modal notify-modal" id="notify-modal" aria-hidden="true">
+  <div class="event-dialog" role="dialog" aria-modal="true" aria-labelledby="notify-title">
+    <button class="event-close notify-close" type="button" aria-label="Close next event notification form">×</button>
+    <div class="event-modal-head">
+      <div class="event-kicker">Get notified</div>
+      <h2 class="event-title" id="notify-title">NEXT EVENT DROPS AFTER WINTERFEST</h2>
+      <p class="event-subtitle">Events are announced the day after the current event finishes. Leave your email and be first to know when the next Bossman event is live.</p>
+    </div>
+    <div class="event-modal-body">
+      <form class="notify-form" onsubmit="event.preventDefault(); this.classList.add('sent'); this.querySelector('.notify-btn').textContent='YOU'RE IN'; this.querySelector('.notify-btn').disabled=true;">
+        <input class="notify-input" type="email" placeholder="Your email address" aria-label="Your email address" required>
+        <button class="notify-btn" type="submit">Notify Me</button>
+      </form>
+      <div class="notify-note">Next announcement target: Monday 22 June 2026. No spam, just event drops and key updates.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- VENDOR MARQUEE -->
+<div class="vmq reveal" id="vendors">
+  <div class="vmq-head">
+    <div><div class="eye">The Lineup</div><div class="hed" style="margin-bottom:0">MEET THE VENDORS</div></div>
+    <a href="#vendor-lineup-modal" class="link-all vendor-lineup-open">Full lineup →</a>
+  </div>
+  <div class="mq-row ltr">
+    <div class="mq-track" id="vt1"></div>
+    <div class="mq-track" id="vt1b"></div>
+  </div>
+  <div class="mq-row rtl" style="margin-top:10px">
+    <div class="mq-track" id="vt2"></div>
+    <div class="mq-track" id="vt2b"></div>
+  </div>
+</div>
+
+
+<!-- VENDOR LINEUP MODAL -->
+<div class="event-modal vendor-modal" id="vendor-lineup-modal" aria-hidden="true">
+  <div class="event-dialog" role="dialog" aria-modal="true" aria-labelledby="vendor-lineup-title">
+    <button class="event-close vendor-close" aria-label="Close vendor lineup">×</button>
+    <div class="event-modal-head">
+      <div class="event-kicker">Full Lineup</div>
+      <h2 class="event-title" id="vendor-lineup-title">MOUNTIES WINTERFEST</h2>
+      <p class="event-subtitle">The food lineup split by category, so guests can find exactly what they are craving.</p>
+    </div>
+    <div class="event-modal-body">
+      <div class="vendor-lineup-grid">
+        <div class="vendor-category">
+          <div class="vendor-category-head"><h3>SAVOURY</h3></div>
+          <ul class="vendor-list">
+            <li>Spudhole</li>
+            <li>Pharaoh BBQ</li>
+            <li>Smoking Gringos</li>
+            <li>Dani & Junz</li>
+            <li>Cathy's Kai</li>
+            <li>Detroit Dip</li>
+            <li>Homemade Dumplings</li>
+            <li>The Big Big Aloha</li>
+            <li>Sammy's Restaurant</li>
+            <li>Skewiies</li>
+            <li>Teettzz Eatz</li>
+            <li>Hellenic Grill</li>
+            <li>Nonna Maria's</li>
+            <li>Maker's Daily</li>
+          </ul>
+        </div>
+        <div class="vendor-category">
+          <div class="vendor-category-head"><h3>DESSERT</h3></div>
+          <ul class="vendor-list">
+            <li>Le Crookie</li>
+            <li>Doughlicious Desserts</li>
+            <li>Fluffy Crunch</li>
+          </ul>
+        </div>
+        <div class="vendor-category">
+          <div class="vendor-category-head"><h3>DRINKS</h3></div>
+          <ul class="vendor-list">
+            <li>K-Thirst</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vendor-note">Lineup may change closer to the event. Follow Bossman Experiences for vendor drops and updates.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIKTOK -->
+<section class="sec dark" id="tiktok">
+  <div class="sec-row reveal">
+    <div><div class="eye lt">@bossman_experiences</div><div class="hed lt">CATCH THE VIBE</div></div>
+  </div>
+  <div class="tt-outer reveal">
+    <div class="tt-carousel" id="ttc" aria-label="TikTok video carousel"></div>
+  </div>
+  <div class="tt-note reveal">Muted autoplay uses TikTok's official player. Add your real TikTok video IDs in the script below.</div>
+  <div class="tt-arrows reveal">
+    <button class="tt-arr" id="tt-prev">←</button>
+    <button class="tt-arr" id="tt-next">→</button>
+  </div>
+  <div class="tt-nav" id="tt-dots"></div>
+  <div class="tt-cta reveal">
+    <a href="https://www.tiktok.com/@bossman_experiences" target="_blank" rel="noopener" class="tt-follow">▶ View All Videos on TikTok</a>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec alt reveal">
+  <div><div class="eye">Why Come</div><div class="hed" style="margin-bottom:36px">THE BOSSMAN EXPERIENCE</div></div>
+  <div class="exp-grid">
+    <div class="exp-cell wide">
+      <div class="exp-ico">🔥</div>
+      <div class="exp-t">WESTERN SYDNEY'S FOOD SCENE — ALL IN ONE PLACE</div>
+      <div class="exp-d">Spuds, smash burgers, birria, dumplings, BBQ, Polynesian, Filipino, Korean, Italian. We bring the whole city to you.</div>
+    </div>
+    <div class="exp-cell"><div class="exp-ico">🎤</div><div class="exp-t">LIVE ENTERTAINMENT</div><div class="exp-d">The vibe doesn't stop when the food hits.</div></div>
+    <div class="exp-cell"><div class="exp-ico">🚪</div><div class="exp-t">FREE ENTRY</div><div class="exp-d">No tickets. No gates. Just show up and eat.</div></div>
+    <div class="exp-cell"><div class="exp-ico">🅿️</div><div class="exp-t">FREE PARKING</div><div class="exp-d">On-site at Mounties — no stress.</div></div>
+    <div class="exp-cell"><div class="exp-ico">📍</div><div class="exp-t">MT PRITCHARD</div><div class="exp-d">Heart of Western Sydney, easy to reach.</div></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="sec" id="location">
+  <div class="sec-row reveal">
+    <div><div class="eye">Getting There</div><div class="hed">LOCATION</div></div>
+  </div>
+  <div class="dir-grid reveal">
+    <div class="dir-map">
+      <div class="dir-map-vis">
+        <iframe
+          title="Interactive map to Mounties Club"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Mounties%20Club%2C%20254%20Humphries%20Rd%2C%20Mount%20Pritchard%20NSW%202170&output=embed">
+        </iframe>
+      </div>
+      <div class="dir-map-body">
+        <div class="dir-name">MOUNTIES CLUB</div>
+        <div class="dir-addr">254 Humphries Rd, Mount Pritchard NSW 2170</div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=254+Humphries+Rd+Mount+Pritchard+NSW+2170" target="_blank" rel="noopener" class="dir-btn">📍 Get Directions</a>
+      </div>
+    </div>
+    <div class="transport">
+      <div class="t-item">
+        <div class="t-ico">🚌</div>
+        <div><div class="t-title">Bus</div><div class="t-desc">Routes 808, 815 or 816 toward Mount Pritchard. Stop right outside Mounties.</div></div>
+      </div>
+      <div class="t-item">
+        <div class="t-ico">🚂</div>
+        <div><div class="t-title">Train</div><div class="t-desc">T2 or T5 to Liverpool, Cabramatta or Warwick Farm — then bus or rideshare to Mounties.</div></div>
+      </div>
+      <div class="t-item">
+        <div class="t-ico">🚗</div>
+        <div><div class="t-title">Drive & Park</div><div class="t-desc">Free on-site parking at Mounties. Come early on weekends for the best spots.</div></div>
+      </div>
+      <div class="t-item">
+        <div class="t-ico">📱</div>
+        <div><div class="t-title">Rideshare</div><div class="t-desc">~10–15 min from Liverpool or Cabramatta Station via Uber or DiDi.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">BOSSMAN<span>.</span></div>
+      <div class="ft-tag">Western Sydney's premier food experience. Bringing the best vendors to you, every event.</div>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <div class="ft-col-t">Events</div>
+        <a href="#events">Winterfest 2026</a>
+        <a href="#events">All Events</a>
+        <a href="#">Apply as Vendor</a>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Company</div>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-t">Legal</div>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <span>© 2026 Bossman Experiences. All rights reserved.</span>
+    <div class="socials">
+      <a href="https://www.tiktok.com/@bossman_experiences" target="_blank" rel="noopener" class="soc">TK</a>
+      <a href="#" class="soc">IG</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+/* =========================================================
+   EASY EVENT EDITOR
+   Change only this block when Bossman has a new event.
+   The website will update the hero, event card, countdown,
+   event popup, vendor popup, map, directions and announcement.
+========================================================= */
+const BOSSMAN_EVENT = {
+  name: 'Mounties Winterfest',
+  shortName: 'Winterfest 2026',
+  tagline: 'Three days of stacked street food, live energy and Bossman vendors taking over Mounties Carpark in Mt Pritchard.',
+  modalDescription: 'Three days of Western Sydney food, live energy and 20+ vendors at Mounties Winterfest in the Mounties carpark.',
+  heroBadge: 'Mounties Winterfest · Free Entry',
+  heroWords: ['BIG.', 'LOUD.', 'HUNGRY.', 'LOCAL.', 'LATE.'],
+
+  dateRange: '19th June – 21st June 2026',
+  dateRangeShort: '19–21 June',
+  countdownTo: '2026-06-19T17:00:00+10:00',
+  announcementDate: '2026-06-22T09:00:00+10:00',
+  announcementLabel: 'Monday 22 June',
+
+  venue: 'Mounties Carpark',
+  venueShort: 'Mounties Carpark',
+  address: '254 Humphries Rd, Mount Pritchard NSW 2170',
+  addressShort: '254 Humphries Rd',
+  mapQuery: 'Mounties Club, 254 Humphries Rd, Mount Pritchard NSW 2170',
+
+  entry: 'Free entry, no ticket needed',
+  heroHighlights: ['19–21 June', 'Mounties Carpark', '20+ Vendors', 'Free Entry'],
+
+  schedule: [
+    { day: 'Friday 19 June', time: '5pm – 10pm' },
+    { day: 'Saturday 20 June', time: '5pm – 10pm' },
+    { day: 'Sunday 21 June', time: '12pm – 8pm' }
+  ],
+
+  vendors: {
+    savoury: ['Spudhole','Pharaoh BBQ','Smoking Gringos','Dani & Junz','Cathy\'s Kai','Detroit Dip','Homemade Dumplings','The Big Big Aloha','Sammy\'s Restaurant','Skewiies','Teettzz Eatz','Hellenic Grill','Nonna Maria\'s','Maker\'s Daily'],
+    dessert: ['Le Crookie','Doughlicious Desserts','Fluffy Crunch'],
+    drinks: ['K-Thirst']
+  },
+
+  giveaway: {
+    title: 'WIN 5 FREE FOOD VOUCHERS',
+    text: 'Drop your number for a chance to score a free feed at Winterfest. No spam, winner gets texted.'
+  },
+
+  tiktokVideoIds: [
+    // Paste real TikTok video IDs here, for example: '1234567890123456789'
+  ]
+};
+
+function bossmanDirectionsUrl(){
+  return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(BOSSMAN_EVENT.address);
+}
+
+function bossmanMapEmbedUrl(){
+  return 'https://www.google.com/maps?q=' + encodeURIComponent(BOSSMAN_EVENT.mapQuery || BOSSMAN_EVENT.address) + '&output=embed';
+}
+
+function bossmanSetText(selector, text){
+  const el = document.querySelector(selector);
+  if(el) el.textContent = text;
+}
+
+function bossmanSetHTML(selector, html){
+  const el = document.querySelector(selector);
+  if(el) el.innerHTML = html;
+}
+
+function bossmanRenderVendorList(selector, vendors){
+  const list = document.querySelector(selector);
+  if(!list) return;
+  list.innerHTML = vendors.map(v => '<li>' + v + '</li>').join('');
+}
+
+function renderBossmanEvent(){
+  const e = BOSSMAN_EVENT;
+  const firstSchedule = e.schedule[0] || {day:'', time:''};
+  const secondSchedule = e.schedule[1] || firstSchedule;
+  const lastSchedule = e.schedule[e.schedule.length - 1] || firstSchedule;
+  const totalVendors = Object.values(e.vendors).flat().length;
+
+  const tickerItems = [e.shortName.toUpperCase(), 'MOUNTIES — ' + e.dateRangeShort.toUpperCase(), totalVendors + '+ VENDORS', 'FREE ENTRY — NO TICKETS NEEDED', "WESTERN SYDNEY'S BIGGEST FOOD EVENT"];
+  const ticker = document.querySelector('.t-inner');
+  if(ticker){
+    ticker.innerHTML = [...tickerItems, ...tickerItems].map(item => '<span>' + item + '</span><span>✦</span>').join('');
+  }
+
+  bossmanSetHTML('.hero-live', '<span class="live-dot"></span>' + e.heroBadge);
+  bossmanSetText('.hero-sub', e.tagline);
+  const heroDetails = document.querySelector('.hero-details');
+  if(heroDetails){
+    heroDetails.innerHTML = e.heroHighlights.map((h,i)=>'<span class="hero-pill">' + (i===0?'<strong>'+h+'</strong>':h) + '</span>').join('');
+  }
+
+  bossmanSetText('.stats .stat:nth-child(1) .stat-n', totalVendors + '+');
+  bossmanSetText('.stats .stat:nth-child(2) .stat-n', String(e.schedule.length));
+
+  bossmanSetText('.gw-text strong', e.giveaway.title);
+  bossmanSetText('.gw-text span', e.giveaway.text);
+
+  bossmanSetText('.event-open .ebadge', e.dateRangeShort.toUpperCase());
+  bossmanSetText('.event-open .vtag', e.venueShort + ' — Mt Pritchard');
+  bossmanSetText('.event-open .ename', e.name.toUpperCase());
+  bossmanSetHTML('.event-open .emeta', '<span>' + e.dateRange.replace('2026','') + '</span><span>·</span><span>' + e.addressShort + '</span>');
+
+  bossmanSetText('.announcement-date', e.announcementLabel);
+  bossmanSetText('#notify-title', 'NEXT EVENT DROPS AFTER ' + e.shortName.toUpperCase().replace(' 2026',''));
+  bossmanSetText('.notify-note', 'Next announcement target: ' + e.announcementLabel + ' 2026. No spam, just event drops and key updates.');
+
+  bossmanSetText('#winterfest-title', e.name.toUpperCase());
+  bossmanSetText('.event-subtitle', e.modalDescription);
+  const detailCards = document.querySelectorAll('#winterfest-modal .event-detail strong');
+  if(detailCards[0]) detailCards[0].textContent = e.dateRange;
+  if(detailCards[1]) detailCards[1].textContent = firstSchedule.time && secondSchedule.time ? 'Fri/Sat ' + firstSchedule.time + ', Sun ' + lastSchedule.time : '';
+  if(detailCards[2]) detailCards[2].textContent = e.entry;
+  if(detailCards[3]) detailCards[3].textContent = e.venue;
+
+  const scheduleBox = document.querySelector('.event-schedule');
+  if(scheduleBox){
+    scheduleBox.innerHTML = e.schedule.map(item => '<div class="event-time"><b>' + item.day + '</b><span>' + item.time + '</span></div>').join('');
+  }
+
+  const eventLocation = document.querySelector('#winterfest-modal .event-panel:last-child p');
+  if(eventLocation){
+    eventLocation.innerHTML = '<strong style="color:var(--dark)">' + e.name + '</strong><br>' + e.venue + '<br>' + e.address;
+  }
+  document.querySelectorAll('a[href^="https://www.google.com/maps/dir/"]').forEach(a=>a.href = bossmanDirectionsUrl());
+
+  bossmanSetText('#vendor-lineup-title', e.name.toUpperCase());
+  bossmanRenderVendorList('.vendor-category:nth-child(1) .vendor-list', e.vendors.savoury);
+  bossmanRenderVendorList('.vendor-category:nth-child(2) .vendor-list', e.vendors.dessert);
+  bossmanRenderVendorList('.vendor-category:nth-child(3) .vendor-list', e.vendors.drinks);
+
+  bossmanSetText('.dir-name', (e.venueShort || e.venue).toUpperCase());
+  bossmanSetText('.dir-addr', e.address);
+  const map = document.querySelector('.dir-map-vis iframe');
+  if(map) map.src = bossmanMapEmbedUrl();
+}
+
+renderBossmanEvent();
+
+/* ── MOBILE MENU ── */
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+const navBackdrop = document.querySelector('.nav-backdrop');
+function closeMenu(){
+  document.body.classList.remove('menu-open');
+  if(navToggle) navToggle.setAttribute('aria-expanded','false');
+}
+function openMenu(){
+  document.body.classList.add('menu-open');
+  if(navToggle) navToggle.setAttribute('aria-expanded','true');
+}
+if(navToggle && navMenu){
+  navToggle.addEventListener('click',()=>{
+    document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
+  });
+  navMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+  if(navBackdrop) navBackdrop.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',e=>{ if(e.key === 'Escape') closeMenu(); });
+}
+
+
+/* ── HERO WORD ROTATOR ── */
+const heroWord = document.getElementById('hero-word');
+const heroWords = BOSSMAN_EVENT.heroWords;
+let heroWordIndex = 0;
+if(heroWord){
+  setInterval(()=>{
+    heroWord.classList.add('swap');
+    setTimeout(()=>{
+      heroWordIndex = (heroWordIndex + 1) % heroWords.length;
+      heroWord.textContent = heroWords[heroWordIndex];
+      heroWord.classList.remove('swap');
+    }, 280);
+  }, 1800);
+}
+
+/* ── COUNTDOWN ── */
+const target = new Date(BOSSMAN_EVENT.countdownTo);
+function tick(){
+  const diff = target - new Date();
+  if(diff <= 0){['d','h','m','s'].forEach(id=>document.getElementById(id).textContent='00');return;}
+  document.getElementById('d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+setInterval(tick,1000); tick();
+
+/* ── VENDOR MARQUEE — JS driven, no glitch ── */
+const row1 = BOSSMAN_EVENT.vendors.savoury.slice(0, 9);
+const row2 = BOSSMAN_EVENT.vendors.dessert.concat(BOSSMAN_EVENT.vendors.drinks, BOSSMAN_EVENT.vendors.savoury.slice(9));
+
+function makePill(name){
+  const d = document.createElement('div');
+  d.className = 'vpill';
+  d.innerHTML = '<span class="vdot"></span>' + name;
+  return d;
+}
+
+function setupMarquee(trackId, items, speed){
+  const track = document.getElementById(trackId);
+  if(!track) return;
+  items.forEach(n => track.appendChild(makePill(n)));
+  const clone = track.cloneNode(true);
+  clone.id = trackId + '_clone';
+  track.parentElement.appendChild(clone);
+
+  let pos = 0;
+  const w = track.scrollWidth + 10;
+  function step(){
+    pos += speed;
+    if(pos >= w) pos = 0;
+    track.style.transform = 'translateX(-' + pos + 'px)';
+    clone.style.transform = 'translateX(-' + pos + 'px)';
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function setupMarqueeRTL(trackId, items, speed){
+  const track = document.getElementById(trackId);
+  if(!track) return;
+  items.forEach(n => track.appendChild(makePill(n)));
+  const clone = track.cloneNode(true);
+  clone.id = trackId + '_clone';
+  track.parentElement.appendChild(clone);
+
+  let pos = 0;
+  const w = track.scrollWidth + 10;
+  function step(){
+    pos -= speed;
+    if(pos <= -w) pos = 0;
+    track.style.transform = 'translateX(' + pos + 'px)';
+    clone.style.transform = 'translateX(' + (pos + w) + 'px)';
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+setTimeout(()=>{
+  setupMarquee('vt1', row1, 0.6);
+  setupMarqueeRTL('vt2', row2, 0.55);
+}, 200);
+
+/* ── TIKTOK CAROUSEL ──
+   Paste real TikTok post IDs below, the long number from a URL like:
+   https://www.tiktok.com/@bossman_experiences/video/1234567890123456789
+*/
+const tiktokVideos = BOSSMAN_EVENT.tiktokVideoIds.filter(Boolean);
+
+const carousel = document.getElementById('ttc');
+const dotsContainer = document.getElementById('tt-dots');
+let cards = [];
+let cardW = 236;
+let cur = 0;
+
+function makeTikTokCard(videoId, index){
+  const card = document.createElement('div');
+  card.className = 'tt-card';
+  const src = 'https://www.tiktok.com/player/v1/' + encodeURIComponent(videoId) + '?autoplay=1&muted=1&loop=1&controls=0&rel=0&description=0&music_info=0';
+  card.innerHTML = '<iframe title="Bossman TikTok video ' + (index + 1) + '" src="' + src + '" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+  return card;
+}
+
+function makeFallbackCard(caption){
+  const card = document.createElement('a');
+  card.className = 'tt-card';
+  card.href = 'https://www.tiktok.com/@bossman_experiences';
+  card.target = '_blank';
+  card.rel = 'noopener';
+  card.innerHTML = '<div class="tt-fallback"><div class="tt-logo-txt">Tik<span>Tok</span></div><div class="tt-play-btn">▶</div><div class="tt-handle">@bossman_experiences</div><div class="tt-caption">' + caption + '</div></div>';
+  return card;
+}
+
+function renderTikTokCarousel(){
+  if(!carousel || !dotsContainer) return;
+  carousel.innerHTML = '';
+
+  const fallbackCaptions = [
+    'Add TikTok video IDs to enable muted autoplay',
+    'Event highlights & behind the scenes',
+    'Vendor spotlights from Winterfest',
+    'Western Sydney food content',
+    'Market day recaps & crowd reactions',
+    'Food drops you do not want to miss'
+  ];
+
+  if(tiktokVideos.length){
+    tiktokVideos.forEach((id, i) => carousel.appendChild(makeTikTokCard(id, i)));
+  }else{
+    fallbackCaptions.forEach(c => carousel.appendChild(makeFallbackCard(c)));
+  }
+
+  cards = Array.from(carousel.querySelectorAll('.tt-card'));
+  buildDots();
+  goTo(0);
+}
+
+function visibleCards(){
+  if(window.innerWidth < 760) return 1;
+  if(window.innerWidth < 1100) return 2;
+  return 3;
+}
+
+function updateCardW(){
+  const first = carousel ? carousel.querySelector('.tt-card') : null;
+  if(!first) return;
+  const styles = window.getComputedStyle(carousel);
+  const gap = parseFloat(styles.columnGap || styles.gap || 16) || 16;
+  cardW = first.getBoundingClientRect().width + gap;
+}
+
+function buildDots(){
+  dotsContainer.innerHTML = '';
+  const max = Math.max(0, cards.length - visibleCards());
+  for(let i = 0; i <= max; i++){
+    const b = document.createElement('button');
+    b.className = 'tt-dot' + (i===0?' active':'');
+    b.setAttribute('aria-label', 'Show TikTok slide ' + (i + 1));
+    b.onclick = ()=>goTo(i);
+    dotsContainer.appendChild(b);
+  }
+}
+
+function goTo(idx){
+  if(!carousel) return;
+  updateCardW();
+  const max = Math.max(0, cards.length - visibleCards());
+  cur = Math.max(0, Math.min(idx, max));
+  carousel.style.transform = 'translateX(-' + (cur * cardW) + 'px)';
+  dotsContainer.querySelectorAll('.tt-dot').forEach((d,i)=>d.classList.toggle('active', i===cur));
+}
+
+const prevBtn = document.getElementById('tt-prev');
+const nextBtn = document.getElementById('tt-next');
+if(prevBtn) prevBtn.onclick = ()=> goTo(cur - 1);
+if(nextBtn) nextBtn.onclick = ()=> goTo(cur + 1);
+window.addEventListener('resize', ()=>{ buildDots(); goTo(cur); });
+renderTikTokCarousel();
+
+
+
+/* ── NEXT EVENT ANNOUNCEMENT COUNTDOWN ── */
+const nextAnnouncement = new Date(BOSSMAN_EVENT.announcementDate);
+function tickNextAnnouncement(){
+  const diff = nextAnnouncement - new Date();
+  const ids = ['nd','nh','nm','ns'];
+  if(diff <= 0){
+    ids.forEach(id=>{ const el = document.getElementById(id); if(el) el.textContent = '00'; });
+    return;
+  }
+  const vals = [
+    Math.floor(diff/86400000),
+    Math.floor((diff%86400000)/3600000),
+    Math.floor((diff%3600000)/60000),
+    Math.floor((diff%60000)/1000)
+  ];
+  ids.forEach((id,i)=>{ const el = document.getElementById(id); if(el) el.textContent = String(vals[i]).padStart(2,'0'); });
+}
+setInterval(tickNextAnnouncement,1000); tickNextAnnouncement();
+
+/* ── NEXT EVENT NOTIFY POPUP ── */
+const notifyModal = document.getElementById('notify-modal');
+const notifyOpeners = document.querySelectorAll('.notify-open');
+const notifyClose = notifyModal ? notifyModal.querySelector('.notify-close') : null;
+let lastNotifyTrigger = null;
+
+function openNotifyModal(trigger){
+  if(!notifyModal) return;
+  lastNotifyTrigger = trigger || document.activeElement;
+  notifyModal.classList.add('open');
+  notifyModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-lock');
+  const input = notifyModal.querySelector('.notify-input');
+  setTimeout(()=>{ if(input) input.focus(); }, 40);
+}
+
+function closeNotifyModal(options){
+  if(!notifyModal) return;
+  const shouldRestoreFocus = !options || options.restoreFocus !== false;
+  notifyModal.classList.remove('open');
+  notifyModal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-lock');
+  if(shouldRestoreFocus && lastNotifyTrigger && lastNotifyTrigger.focus) lastNotifyTrigger.focus();
+}
+
+notifyOpeners.forEach(card=>{
+  card.addEventListener('click', ()=>openNotifyModal(card));
+  card.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openNotifyModal(card);
+    }
+  });
+});
+if(notifyClose) notifyClose.addEventListener('click', ()=>closeNotifyModal());
+if(notifyModal){
+  notifyModal.addEventListener('click', e=>{ if(e.target === notifyModal) closeNotifyModal(); });
+}
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && notifyModal && notifyModal.classList.contains('open')) closeNotifyModal();
+});
+
+
+/* ── EVENT DETAILS POPUP ── */
+const eventModal = document.getElementById('winterfest-modal');
+const eventOpeners = document.querySelectorAll('.event-open');
+const eventClose = eventModal ? eventModal.querySelector('.event-close') : null;
+let lastEventTrigger = null;
+
+function openEventModal(trigger){
+  if(!eventModal) return;
+  lastEventTrigger = trigger || document.activeElement;
+  eventModal.classList.add('open');
+  eventModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-lock');
+  if(eventClose) eventClose.focus();
+}
+
+function closeEventModal(options){
+  if(!eventModal) return;
+  const shouldRestoreFocus = !options || options.restoreFocus !== false;
+  eventModal.classList.remove('open');
+  eventModal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-lock');
+  if(shouldRestoreFocus && lastEventTrigger && lastEventTrigger.focus) lastEventTrigger.focus();
+}
+
+eventOpeners.forEach(card=>{
+  card.addEventListener('click', ()=>openEventModal(card));
+  card.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openEventModal(card);
+    }
+  });
+});
+if(eventClose) eventClose.addEventListener('click', ()=>closeEventModal());
+
+const eventLineupLinks = document.querySelectorAll('.event-lineup-link');
+eventLineupLinks.forEach(link=>{
+  link.addEventListener('click', e=>{
+    closeEventModal({restoreFocus:false});
+    const target = document.querySelector(link.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+    }
+  });
+});
+
+if(eventModal){
+  eventModal.addEventListener('click', e=>{ if(e.target === eventModal) closeEventModal(); });
+}
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && eventModal && eventModal.classList.contains('open')) closeEventModal();
+});
+
+
+/* ── VENDOR LINEUP POPUP ── */
+const vendorModal = document.getElementById('vendor-lineup-modal');
+const vendorOpeners = document.querySelectorAll('.vendor-lineup-open');
+const vendorClose = vendorModal ? vendorModal.querySelector('.vendor-close') : null;
+let lastVendorTrigger = null;
+
+function openVendorModal(trigger){
+  if(!vendorModal) return;
+  lastVendorTrigger = trigger || document.activeElement;
+  vendorModal.classList.add('open');
+  vendorModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-lock');
+  if(vendorClose) vendorClose.focus();
+}
+
+function closeVendorModal(options){
+  if(!vendorModal) return;
+  const shouldRestoreFocus = !options || options.restoreFocus !== false;
+  vendorModal.classList.remove('open');
+  vendorModal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-lock');
+  if(shouldRestoreFocus && lastVendorTrigger && lastVendorTrigger.focus) lastVendorTrigger.focus();
+}
+
+vendorOpeners.forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    openVendorModal(link);
+  });
+});
+if(vendorClose) vendorClose.addEventListener('click', ()=>closeVendorModal());
+if(vendorModal){
+  vendorModal.addEventListener('click', e=>{ if(e.target === vendorModal) closeVendorModal(); });
+}
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && vendorModal && vendorModal.classList.contains('open')) closeVendorModal();
+});
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
